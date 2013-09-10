@@ -1,0 +1,24 @@
+<% include header %>
+<div id="account-form">
+<form action="/secure/account" method="post">
+<fieldset>
+	<label for="username">Username:</label>
+	<input type="text" id="username" STYLE="color: #C7C7C7;" disabled name="username" value ="<%= user.username %>" class="text ui-widget-content ui-corner-all"/ ><br/>
+	<label>Name:</label>
+	<input type="text" name="name" value ="<%= user.name %>" class="text ui-widget-content ui-corner-all"/><br/>
+	<label>Contact:</label>
+	<input type="text"  name="contact" value ="<%= user.contact %>" class="text ui-widget-content ui-corner-all"/><br/>
+	<label>School:</label>
+	<input type="text"  name="school" value ="<%= user.school %>" class="text ui-widget-content ui-corner-all"/><br/>
+	<label>Skills:</label>
+	<input type="text"  name="skills" value ="<%= user.skills %>" class="text ui-widget-content ui-corner-all"/><br/>	
+	<label>Email:</label>
+	<input type="email"  name="email" value ="<%= user.email %>" class="text ui-widget-content ui-corner-all"/><br/>
+	<label>Password:</label>
+	<input id="passwordA" type="password" name="passwordA" class="text ui-widget-content ui-corner-all"/>
+	<hr>
+	<input type="submit" value="Update"/>
+</fieldset>
+</form>
+</div>
+

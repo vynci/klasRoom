@@ -1,0 +1,25 @@
+{
+  "name": "klasRoom",
+  "version": "0.0.1",
+  "description": "klasRoom is an app for virtual tutorial, school or other academic purposes.",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/vynci/klasRoom.git"
+  },
+  "author": "Vince Noel C. Elizaga",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~3.1.0",
+    "ejs": "~0.8.3",
+    "passport": "~0.1.15",
+    "passport-local": "~0.1.6",
+    "mongoose": "~3.5.5",
+    "bcrypt": "~0.7.3",
+    "socket.io": "~0.9.16",
+    "zxcvbn": "~1.0.0",
+    "node-uuid": "~1.4.1"
+  }
+
+
+
+}

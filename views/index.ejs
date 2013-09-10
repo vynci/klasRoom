@@ -1,0 +1,10 @@
+<% include header %>
+<% if (!user) { %>
+	<% include login %>
+<% } else { %>
+	<h2 align="center">Hello, <%= user.username %>.</h2>
+	<br>
+	<% include chat %>	
+	
+<% } %>
+<% include footer %>

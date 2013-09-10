@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+        <% if (!user) { %>
+            <title>klasRoom - Login</title>
+        <% } else { %>
+            <title>klasRoom - Home</title>     
+        <% } %>        
+        <script src="/public/zxcvbn/zxcvbn-async.js"></script>
+        <script type="text/javascript" src="/scripts/vendor/jquery-1.9.1.js"></script>
+        
+        <script type="text/javascript" src="/scripts/vendor/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/scripts/vendor/jquery-ui.css" />      
+        <link rel="stylesheet" href="/scripts/vendor/demo.css">
+        
+        <script src="/scripts/socket.io.js"></script>
+        <script type="text/javascript" src="/scripts/jscolor/jscolor.js"></script>
+        
+        
+        <script>
+        $(document).ready(function() {
+            $( "input[type=submit], button, input[type=button], input[class='joinRoomBtn'], a[class='test']" ).button();
+
+            $( "#signup-form" ).dialog({
+                    autoOpen: false,
+                    modal: true,
+                    resizable: false
+            });
+
+            $( "#signup" ).click(function() {
+                $( "#signup-form" ).dialog( "open" );
+             
+            });     
+
+        });
+        </script>
+	</head>
+	<body><div align="center">
+		<% if (!user) { %>
+			<p>
+			</p>
+		<% } else { %>
+			<p>
+			<a href="/" class = "test">Home</a> | 
+			<a href="/secure/account" class = "test">Account</a> |
+			<a href="/dmz/logout" class = "test">Sign Out</a>
+			</p>
+		<% } %>
+    </div>
+    <% include signup %>
+   
+

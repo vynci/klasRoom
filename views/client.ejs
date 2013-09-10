@@ -1,0 +1,333 @@
+<script type="text/javascript">
+
+$(document).ready(function() {
+    var socket = io.connect();
+    var ready;
+    var name = "<%= user.username %>";    
+    var myRoomID = null;
+
+
+    $('#inroom-people-panel').hide();
+    $("#people-panel").show();
+    $("#room-panel").show();
+    $('#chat-panel').hide();
+    $('#drawing-panel').hide();
+    ready = true;
+ 
+    $("form").submit(function(event){
+        event.preventDefault();
+    });
+
+    socket.emit("joinserver", name);
+
+    $("#name").keypress(function(e){
+      if(e.which == 13) {
+        var name = $("#name").val();
+        if (name != "") {
+          socket.emit("joinserver", name);
+          ready = true;
+          $("#login").detach();
+          $('#chat-panel').show();
+          $("#room-panel").show();
+          $("#chat").show();
+          $("#msg").focus();
+
+        }
+      }
+    });
+
+    $("#send").click(function() {
+      var msg = $("#msg").val();
+      socket.emit("send", msg);
+      $("#msg").val("");
+    });
+
+    $("#msg").keypress(function(e) {
+      if(e.which == 13) {
+        var msg = $("#msg").val();
+        socket.emit("send", msg);
+        $("#msg").val("");
+      }
+    });
+
+
+
+
+    $("#rooms").on('click', '.joinRoomBtn', function() {
+      var roomName = $(this).siblings("span").text();
+      var roomID = $(this).attr("id");
+      myturn = false;
+      socket.emit("joinRoom", roomID);
+      $("#msgs").empty();
+      $("#clearcanvas").hide();
+      $("#colortable").hide();     
+      $("#room-panel").hide();
+      $("#people-panel").hide();
+      $('#chat-panel').show();
+      $('#drawing-panel').show();
+      $('#inroom-people-panel').show();
+    });
+
+    $("#rooms").on('click', '.removeRoomBtn', function() {
+      var roomName = $(this).siblings("span").text();
+      var roomID = $(this).attr("id");
+      console.log("Remove ==> " + roomID);
+      socket.emit("removeRoom", roomID);
+    });    
+
+    $("#leave").click(function() {
+      var roomID = myRoomID;
+      socket.emit("leaveRoom", roomID);
+      $("#people-panel").show();
+      $("#room-panel").show();
+      $('#inroom-people-panel').hide();
+      $('#chat-panel').hide();
+      $('#drawing-panel').hide();
+
+    });
+
+    socket.on("update", function(msg) {
+      if(ready)
+        $("#msgs").append(msg + "<br>");
+    })
+
+    $("#people").on('click', '.profileViewBtn', function() {      
+      var profName = $(this).attr("id");
+      socket.emit("profRequest", profName);
+
+    });
+
+    $("#peopleInRoom").on('click', '.profileViewBtn', function() {      
+      var profName = $(this).attr("id");
+      socket.emit("profRequest", profName);
+
+    });    
+
+    socket.on("profResponse", function(msg) {
+      $( "#profile-viewer" ).empty();
+      console.log("Beep Boop From Client: " + msg);
+      $('#profile-viewer').append("<label>" + "Username: " + "</label><a>" + msg.username + "</a><br><br>");
+      $('#profile-viewer').append("<label>" + "Name: " + "</label><a>" + msg.name + "</a><br><br>");
+      $('#profile-viewer').append("<label>" + "Contact: " + "</label><a>" + msg.contact + "</a><br><br>");
+      $('#profile-viewer').append("<label>" + "School: " + "</label><a>" + msg.school + "</a><br><br>");
+      $('#profile-viewer').append("<label>" + "Skills: " + "</label><a>" + msg.skills + "</a><br><br>");
+      $('#profile-viewer').append("<label>" + "Email: " + "</label><a>" + msg.email + "</a><br><br>");
+      $( "#profile-viewer" ).dialog( "open" );
+    });
+
+    $( "#profile-viewer" ).dialog({
+      autoOpen: false,
+      modal: true,
+      resizable: false,
+      buttons: {
+        "Ok": function() {
+          $( this ).dialog( "close" );        
+        }
+      }      
+ 
+    });          
+
+    socket.on("update-people", function(people){
+      if(ready) {
+        $("#people").empty();
+        $.each(people, function(clienid, name) {
+          $('#people').append("<li>" + name.name + "<a href='#' id="+name.name+" class='profileViewBtn'>" + " [view]" + "</a></li>");
+        });
+      }
+    });
+
+    socket.on("chat", function(person, msg){
+      if(ready) {
+        $("#msgs").append("<strong><span class='text-success'>" + person.name + "</span></strong> : " + msg + "<br>");
+      }
+    });
+
+    socket.on("roomList", function(data) {
+      var i = 0;
+      $("#rooms").text("");
+      //if (data.rooms.length !== 0) {
+        if (!jQuery.isEmptyObject(data.rooms)) { 
+        $.each(data.rooms, function(id, room) {
+          $('#rooms').append("<li id="+id+"><span>" + room.name + " (" + room.people.length + ") " + "</span> <button id="+id+" class='joinRoomBtn'>Join</button>");
+        });
+
+      } else {
+        $("#rooms").append("<li>There are no rooms yet.</li>");
+      }
+    });
+
+    socket.on("inRoomAdd", function(name, roomname){
+        $("#roomName").empty();
+        $('#roomName').append(roomname); 
+        $("#peopleInRoom").empty();
+        $.each(name, function(){
+        $('#peopleInRoom').append("<li>" + this + "<a href='#' id="+this+" class='profileViewBtn'>" + " [view]" + "</a></li>");
+        });
+         
+
+    });    
+
+    socket.on("sendRoomID", function(data) {
+      console.log("Data ID ==> " + data.id);
+      myRoomID = data.id;
+    });
+
+    socket.on("homeRedirect", function() {
+    $( "#server-destroy" ).dialog( "open" );
+      
+
+    });    
+
+    $( "#server-destroy" ).dialog({
+      autoOpen: false,
+      modal: true,
+      resizable: false,
+      buttons: {
+        "Ok": function() {
+          var roomID = myRoomID;
+          socket.emit("leaveRoom", roomID);
+          $("#people-panel").show();
+          $("#room-panel").show();
+          $('#inroom-people-panel').hide();
+          $('#chat-panel').hide();
+          $('#drawing-panel').hide();      
+          $( this ).dialog( "close" );        
+        }
+      }
+    });
+
+
+    $("#createRoomBtn").click(function() {
+      var roomName = $("#createRoomName").val();
+      if (roomName) {
+        socket.emit("createRoom", roomName);
+      }
+      $("#msgs").empty();
+      $("#room-panel").hide();
+      $("#people-panel").hide();
+      $('#chat-panel').show();
+      $('#drawing-panel').show();
+      $('#inroom-people-panel').show();
+      $('#createRoomForm').dialog( "close" );
+      $('#guest-notice').hide();
+    });
+
+    $( "#showCreateRoom" ).click(function() {
+     $( "#createRoomForm" ).dialog( "open" );        
+    });      
+            
+    $( "#createRoomForm" ).dialog({
+      autoOpen: false,
+      modal: true,
+      resizable: false      
+    });  
+
+                $( "input[type=submit], button, input[type=button], input[class='joinRoomBtn'], a[class='test']" ).button();
+
+            $( "#signup-form" ).dialog({
+                    autoOpen: false,
+                    modal: true,
+                    resizable: false
+            });
+
+            $( "#signup" ).click(function() {
+                $( "#signup-form" ).dialog( "open" );
+             
+            });        
+
+    socket.on("disconnect", function(){
+      $("#msgs").append("<li><strong><span class='text-warning'>The server is not available</span></strong></li>");
+      $("#msg").attr("disabled", "disabled");
+      $("#send").attr("disabled", "disabled");
+    });
+
+//////////////////Drawing canvas block////////////////
+/////////////////////////////////////////////////////
+
+        var canvas = $('#paper'),
+        clearcanvas = $('#clearcanvas'),
+        clearchat = $('#clearchat'),
+        selectedcolor = $('.color'),
+        context = canvas[0].getContext('2d'),
+        lastpoint = null,
+        painting = false,
+        myturn = false;
+      
+      socket.on('draw', draw);
+      
+      function draw(line) {
+        context.lineJoin = 'round';
+        context.lineWidth = 2;
+        context.strokeStyle = line.color;
+        context.beginPath();
+        
+        if(line.from) {
+          context.moveTo(line.from.x, line.from.y);
+        }else{
+          context.moveTo(line.to.x-1, line.to.y);
+        }
+        
+        context.lineTo(line.to.x, line.to.y);
+        context.closePath();
+        context.stroke();
+      }
+      
+      // Disable text selection on the canvas
+      canvas.mousedown(function () {
+        return false;
+      });
+      
+      canvas.mousedown(function(e) {
+        if(myturn) {
+          painting = true;
+          var newpoint = { x: e.pageX - this.offsetLeft, y: e.pageY - this.offsetTop},
+            line = { from: null, to: newpoint, color: selectedcolor.val() };
+          
+          draw(line);
+          lastpoint = newpoint;
+          socket.emit('draw', line);
+        }
+      });
+      
+      canvas.mousemove(function(e) {
+        if(myturn && painting) {
+          var newpoint = { x: e.pageX - this.offsetLeft, y: e.pageY - this.offsetTop},
+            line = { from: lastpoint, to: newpoint, color: selectedcolor.val() };
+          
+          draw(line);
+          lastpoint = newpoint;
+          var roomID = $(this).attr("id");
+          socket.emit('draw', line);
+        }
+      });
+      
+      canvas.mouseout(function(e) {
+        painting = false;
+      });
+      
+      canvas.mouseup(function(e) {
+        painting = false;
+      });
+      
+
+      
+      $("#clearcanvas").click(function() {
+        if(myturn) {
+          socket.emit('clear');
+
+        }
+      });
+
+
+      socket.on('clearCanvas', function() {       
+             context.clearRect ( 0 , 0 , canvas.width() , canvas.height());   
+      });
+
+      socket.on('drawEnable', function() {
+        myturn = true;
+      });
+
+
+
+  });
+</script>

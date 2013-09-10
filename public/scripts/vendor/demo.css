@@ -1,0 +1,291 @@
+body {
+	font-size: 60%;
+	font-family: "Trebuchet MS", "Arial", "Helvetica", "Verdana", "sans-serif";
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #FFFFFF;
+}
+
+table {
+	font-size: 1em;
+}
+
+h2{
+  font-size: 1.5em;     
+  color: #808080;
+  text-shadow: -1px 1px 0 #fff;
+  -moz-text-shadow: -1px 1px 0 #fff;
+  -webkit-text-shadow: -1px 1px 0 #fff;
+
+}
+
+input.text { margin-bottom:12px; width:95%; padding: .4em; }
+
+fieldset { padding:0; border:0; margin-top:25px; }
+
+label {
+  font-size: 1.2em; 		
+  color: #808080;
+  text-shadow: -1px 1px 0 #fff;
+  -moz-text-shadow: -1px 1px 0 #fff;
+  -webkit-text-shadow: -1px 1px 0 #fff;
+}
+
+
+.demo-description {
+	clear: both;
+	padding: 12px;
+	font-size: 1.3em;
+	line-height: 1.4em;
+}
+
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+
+
+
+            #msgs{
+                background:#fff;
+                border-radius:5px;
+                border:1px solid #ccc;
+                width:300px;
+                height:450px;
+                overflow: auto;
+                overflow-x: hidden;
+                padding-top:5px;
+                padding-left:10px;
+                padding-bottom:5px;         
+            }
+
+            #msgs p{
+                padding:0px;
+                margin-top:0px;
+                margin-bottom:5px;
+                
+            }
+            .error{
+                color: red;
+            }
+            .whisper{
+                color: gray;
+                font-style: italic;
+            }
+
+            #strength {
+                text-align: center;
+                
+            }
+            #strength.weak {
+                color: red;
+                border-color: indianred;
+            }
+            #strength.so-so {
+                color: darkorange;
+                border-color: orange;
+            }
+            #strength.strong {
+                color: green;
+                border-color: lightgreen;
+            }
+
+
+            #clearcanvas
+            {
+                margin-top:10px;
+                padding:5px;
+            }
+
+            .color
+            {
+                padding:2px;
+                border:solid 2px #ccc;
+            }
+
+
+            #cursors{
+
+            }
+
+            #cursors .cursor{
+
+                width:15px;
+                height:22px;
+            }
+
+            #paper
+            {
+                cursor:crosshair;
+                background:#E8E8E8;
+            }
+
+            #createRoomForm {
+              
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              margin:0px auto;
+              
+            }  
+
+            #createRoomForm button {
+              width: 255px;
+              height: 30px;
+              font-size:1.1em;
+            }                             
+
+            #signup-form {
+              width: 250px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              margin:0px auto;
+              
+            }
+
+            #profile-viewer {
+              width: 250px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              margin:0px auto;            
+            }
+
+
+            #profile-viewer a{
+              font-size:1.3em;
+              
+            }                         
+
+            #server-destoy {
+              width: 200px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              margin:0px auto;
+              
+            }             
+
+            #signup-form label {
+               font-size: 1em;    
+               color: #808080;
+               text-shadow: -1px 1px 0 #fff;
+               -moz-text-shadow: -1px 1px 0 #fff;
+               -webkit-text-shadow: -1px 1px 0 #fff;              
+              
+            }
+         
+
+            #login-form {
+              width: 250px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              position: fixed;
+              margin-left:750px;
+              margin-top:100px;
+              
+            }  
+            #login-form input.buttonLogin {
+              width: 250px;
+              font-size:1.3em;
+              padding: 6px 40px 6px 40px;
+              margin-left: auto;
+            }    
+
+            #login-form a {
+              font-size:1em;
+
+            } 
+
+            #desc-panel {
+              width: 500px;
+              height: 232px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              position: fixed;
+              margin-left: 200px;
+              margin-top:100px;
+              
+            }                          
+           
+
+             #account-form {
+              width: 250px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              margin:0px auto;
+              
+            } 
+
+
+             #room-panel {
+              width: 250px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              margin:0px auto;
+              
+            } 
+
+            #people-panel {
+
+              width: 250px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              margin:0px auto;
+              margin-top: 20px;
+              
+            }  
+
+            #inroom-people-panel {
+
+              width: 100px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              
+              position: fixed;
+                                        
+            }                           
+
+
+            #chat-panel {
+
+              width: 300px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              
+              margin-left: 150px;
+              position: fixed;
+                                         
+            }  
+
+            #drawing-panel {
+
+              width: 700px;
+              padding: 15px 20px;
+              background: #FFFFFF;
+              border-radius: 6px;
+              box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+              
+              margin-left: 500px;
+                                        
+            }    
+
+
+            

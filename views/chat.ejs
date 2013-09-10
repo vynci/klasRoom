@@ -1,0 +1,64 @@
+
+<% include client %>
+
+<div id="room-panel">
+<h2>Classroom List</h2>
+<ul id="rooms"></ul>
+<button id="showCreateRoom">Create a Class Room</button>
+
+</div>
+
+<div id="createRoomForm" title="Create a class room">
+
+	<label>Room Name:</label>
+	<input type="text" required id="createRoomName" class="text ui-widget-content ui-corner-all">
+	<hr>
+	<button id="createRoomBtn" type="submit">Create room</button>
+
+</div>
+
+
+
+<div id="inroom-people-panel">
+<h2 id="roomName"></h2>
+<ul id="peopleInRoom"></ul>
+</div>
+
+<div id="chat-panel">
+	<div id="msgs"></div>
+  		
+			<form id="2" class="form-inline">
+	  			<input type="text" class="input" placeholder="Your message" id="msg" class="text ui-widget-content ui-corner-all">
+				<input type="button" name="send" id="send" value="Send" class="btn btn-success">
+				<input type="button" name="leave" id="leave" value="Leave Room" class="btn btn-warning">
+			</form>  
+				
+  </div>
+
+</div> 
+
+<div id="people-panel">
+<h2>Participants Lobby</h2>
+<ul id="people"></ul>
+</div>
+
+<div id="server-destroy">
+<p>The owner has left the room</p>
+</div>
+
+<div id="profile-viewer" title="Profile Viewer">
+<ul id="profile-list"></ul>
+</div>
+
+<div id="drawing-panel">
+  	<div id="cursors"></div>
+
+	<canvas id="paper" width="700" height="450"></canvas>
+			<br>	
+			<input type="button" id="clearcanvas" value="Clear canvas" />
+			<input id="colortable" class="color {hash:true}" value="000000">
+			<div id="guest-notice">
+			<p><i>*Only the owner of the room can draw on the canvas</i></p>
+			</div>
+	
+</div>

@@ -1,0 +1,35 @@
+{
+  "name": "zxcvbn",
+  "version": "1.0.0",
+  "description": "realistic password strength estimation",
+  "main": "index.js",
+  "scripts": {
+    "test": "xdg-open zxcvbn/test/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mintplant/node-zxcvbn.git"
+  },
+  "keywords": [
+    "realistic",
+    "password",
+    "strength",
+    "estimation",
+    "estimate",
+    "meter",
+    "validate",
+    "validation"
+  ],
+  "author": {
+    "name": "Dan Wheeler",
+    "url": "published by Michael Smith"
+  },
+  "license": "MIT",
+  "readme": "# node-zxcvbn\n\n[zxcvbn](https://github.com/lowe/zxcvbn) password strength calculator, published\nas a node.js module.\n\nAuthored by Dan Wheeler at Dropbox. Published to npm by Michael Smith.\n\nSee [the original](https://github.com/lowe/zxcvbn) for more details.\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/mintplant/node-zxcvbn/issues"
+  },
+  "_id": "zxcvbn@1.0.0",
+  "_from": "zxcvbn@"
+}
