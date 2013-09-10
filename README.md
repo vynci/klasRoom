@@ -19,5 +19,5 @@ and socket.io and HTML5 websockets for the real-time chat and canvas drawing app
 
 		http://localhost:3000/
 
-3. Enjoy the Pictionary!
+3. Enjoy klasRoom!
 
