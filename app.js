@@ -132,7 +132,7 @@ io.sockets.on('connection', function (socket) {
 							
 							io.sockets.emit("update", uname + " has left the room.");
 							io.sockets.emit("roomList", {rooms: rooms});
-							io.sockets.in(socket.roomTmp).emit("inRoomAdd", roomTmp.people);
+							io.sockets.in(socket.roomTmp).emit("inRoomAdd", roomTmp.people, roomTmp.name);
 						    }
 					});						
 
@@ -240,7 +240,7 @@ io.sockets.on('connection', function (socket) {
 					people[uname].owns = null;
 					io.sockets.emit("update", uname + " has left the room.");
 					io.sockets.emit("roomList", {rooms: rooms});
-					io.sockets.in(socket.room).emit("inRoomAdd", rooms[id].people);
+					io.sockets.in(socket.room).emit("inRoomAdd", rooms[id].people, room.name);
 					socket.leave(room.name);
 				    }
 				 });
